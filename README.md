@@ -23,3 +23,15 @@ If you have a wonky dev environment and you didn't do this in a container, sprin
 
 Run `spring stop` see:
 https://stackoverflow.com/questions/24276033/rails-console-doesnt-start
+
+
+Generation of models
+```
+rails generate scaffold todo title:string
+rails generate scaffold item subject:string contents:text status:string todo:references
+```
+
+Setup DB
+```
+bundle exec rake db:migrate
+```
