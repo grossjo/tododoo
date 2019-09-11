@@ -1,0 +1,102 @@
+#!/usr/bin/env ruby
+
+require 'httparty'
+require 'json'
+require 'pp'
+
+URL_ROOT = "http://localhost:3000"
+
+# List Todos
+result = HTTParty.get('http://localhost:3000/todos')
+puts result.code
+puts result.body
+pp JSON.parse(result.body)
+
+# Create
+body = {
+    todo: {
+        title: "New Todo 1"
+    }
+}
+result = HTTParty.post('http://localhost:3000/todos', body: body)
+puts result.code
+puts result.body
+pp JSON.parse(result.body)
+
+# Update
+body = {
+    todo: {
+        title: "Redo Todo 1"
+    }
+}
+id = 3
+result = HTTParty.put("http://localhost:3000/todos/#{3}", body: body)
+puts result.code
+puts result.body
+pp JSON.parse(result.body)
+
+# Destroy
+id = 3
+result = HTTParty.delete("http://localhost:3000/todos/#{3}", body: body)
+puts result.code
+puts result.body
+pp JSON.parse(result.body)
+
+
+
+# List items
+todo_id = 2
+result = HTTParty.get("http://localhost:3000/todos/#{todo_id}/items")
+puts result.code
+puts result.body
+pp JSON.parse(result.body)
+
+
+
+# Create
+body = {
+    item: {
+        subject: "New item 1",
+        contents: "Reallyimportant",
+        status: 'open'
+    }
+}
+result = HTTParty.post("http://localhost:3000/todos/#{todo_id}/items", body: body)
+puts result.code
+puts result.body
+pp JSON.parse(result.body)
+
+# Update
+body = {
+    item: {
+        status: "closed"
+    }
+}
+id = 3
+result = HTTParty.put("http://localhost:3000/todos/#{todo_id}/items/#{id}", body: body)
+puts result.code
+puts result.body
+pp JSON.parse(result.body)
+
+# Destroy
+id = 3
+result = HTTParty.delete("http://localhost:3000/todos/#{todo_id}/items/#{id}")
+puts result.code
+puts result.body
+pp JSON.parse(result.body)
+
+puts "Item list: il todo_id"
+puts "Item create: ic" #subject contents todo_id 
+puts "Item update: iu id" #status
+puts "Item delete: id id"
+
+command = gets.chomp
+
+case command
+when 'tl'
+    result = HttpParty.get("#{URL_ROOT}/todos")
+    if result.code == 200
+        puts result.body.to_json
+    else
+        puts "Error #{"
+end

@@ -3,7 +3,9 @@ class ItemsController < ApplicationController
 
   # GET /items
   def index
-    @items = Item.all
+    
+    new_params = params.permit(:todo_id)
+    @items = Todo.find(new_params[:todo_id]).items
 
     render json: @items
   end
@@ -15,10 +17,13 @@ class ItemsController < ApplicationController
 
   # POST /items
   def create
-    @item = Item.new(item_params)
+    debugger
+    new_params = params.permit(:todo_id)
+
+    @item = Item.new(item_params.merge(todo_id: new_params[:todo_id]))
 
     if @item.save
-      render json: @item, status: :created, location: @item
+      render json: @item, status: :created#, location: @item
     else
       render json: @item.errors, status: :unprocessable_entity
     end
