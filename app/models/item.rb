@@ -3,4 +3,7 @@ class Item < ApplicationRecord
 
   validates :status, inclusion: { in: %w(open closed),
     message: "%{value} is not a valid status" }
+
+  validates :priority, presence: true
+
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_11_000102) do
+ActiveRecord::Schema.define(version: 2019_09_11_140534) do
 
   create_table "items", force: :cascade do |t|
     t.string "subject"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2019_09_11_000102) do
     t.integer "todo_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "priority"
     t.index ["todo_id"], name: "index_items_on_todo_id"
   end
 

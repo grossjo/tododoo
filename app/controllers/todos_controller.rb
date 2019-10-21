@@ -15,7 +15,7 @@ class TodosController < ApplicationController
 
   # POST /todos
   def create
-    debugger
+    
     @todo = Todo.new(todo_params)
 
     if @todo.save
